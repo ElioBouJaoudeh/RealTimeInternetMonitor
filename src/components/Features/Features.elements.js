@@ -6,7 +6,7 @@ export const FSection = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: #4b59f7;
+  background: #07080a;
 `;
 
 export const FWrapper = styled.div`
@@ -26,7 +26,7 @@ export const FWrapper = styled.div`
 export const FHeading = styled.h1`
   color: #fff;
   font-size: 48px;
-  margin-bottom: 24px;
+  margin-bottom: 50px;
 `;
 
 export const FContainer = styled.div`
@@ -44,10 +44,10 @@ export const FContainer = styled.div`
 `;
 
 export const FCard = styled(Link)`
-  background: #242424;
+  background: #2c4151;
   box-shadow: 0 6px 20px rgba(56, 125, 255, 0.2);
   width: 280px;
-  height: 400px;
+  height: 350px;
   text-decoration: none;
   border-radius: 4px;
 
@@ -58,7 +58,7 @@ export const FCard = styled(Link)`
   &:hover {
     transform: scale(1.06);
     transition: all 0.3s ease-out;
-    color: #1c2237;
+    color: #2c4151;
   }
 
   @media screen and (max-width: 960px) {
@@ -89,4 +89,6 @@ export const FTitle = styled.h4`
 
 export const FDesc = styled.h4`
   margin-bottom: 10px;
+  padding: 20px;
+  text-align: justify;
 `;

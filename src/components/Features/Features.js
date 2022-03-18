@@ -23,33 +23,33 @@ function Features() {
         <FWrapper>
           <FHeading>Our Features</FHeading>
           <FContainer>
-            <FCard to='/sign-up'>
+            <FCard to='/'>
               <FCardInfo>
                 <FCardIcon>
                   <AiOutlineCheckCircle />
                 </FCardIcon>
-                <FTitle>IP Address</FTitle>
-                <FDesc>Feature Description</FDesc>
+                <FTitle>Visibility</FTitle>
+                <FDesc>Check your IP availability over the Internet.</FDesc>
                 <Button primary>Start</Button>
               </FCardInfo>
             </FCard>
-            <FCard to='/sign-up'>
+            <FCard to='/'>
             <FCardInfo>
                 <FCardIcon>
                   <GiConcentrationOrb />
                 </FCardIcon>
-                <FTitle>ASN Information</FTitle>
-                <FDesc>Feature Description</FDesc>
+                <FTitle>History</FTitle>
+                <FDesc>Get an overview of past disruptions of your ISP</FDesc>
                 <Button primary>Start</Button>
               </FCardInfo>
               </FCard>
-            <FCard to='/sign-up'>
+            <FCard to='/'>
               <FCardInfo>
                 <FCardIcon>
                   <GiWireframeGlobe />
                 </FCardIcon>
                 <FTitle>Global Routing</FTitle>
-                <FDesc>Feature Description</FDesc>
+                <FDesc>Check the dynamics of your ASN around the world</FDesc>
                 <Button primary>Start</Button>
                 </FCardInfo>
             </FCard>
