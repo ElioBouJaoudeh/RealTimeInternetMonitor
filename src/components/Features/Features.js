@@ -4,7 +4,6 @@ import { AiOutlineCheckCircle } from 'react-icons/ai';
 import { GiConcentrationOrb } from 'react-icons/gi';
 import { GiWireframeGlobe,  } from 'react-icons/gi';
 import { IconContext } from 'react-icons/lib';
-import Visibility from './Visibility';
 import {
   FSection,
   FWrapper,
@@ -17,19 +16,7 @@ import {
   FDesc
 } from './Features.elements';
 
-const dataa = createContext();
 function Features() {
-  const [data,setData]=useState([{}])
-  useEffect(()=>{
-    fetch("/ip").then(
-      res=>res.json()
-    ).then(
-      data => {
-        setData(data)
-        console.log(data)
-      }
-    )
-  },[])
   return (
     <IconContext.Provider value={{ color: '#a9b3c1', size: 64 }}>
       <FSection>
@@ -44,9 +31,6 @@ function Features() {
                 <FTitle>Visibility</FTitle>
                 <FDesc>Check your IP availability over the Internet.</FDesc>
                 <Button primary>Start</Button>
-                <>
-                  <dataa.Provider value={data}/>
-                </>
               </FCardInfo>
             </FCard>
             <FCard to='/'>
@@ -76,4 +60,3 @@ function Features() {
   );
 }
 export default Features;
-export {dataa};

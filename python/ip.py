@@ -7,8 +7,6 @@ app=Flask(__name__)
 @app.route("/ip")
 
 
-
-
 # private=socket.gethostbyname(socket.gethostname())
 # adr="185.185.179.8"
 

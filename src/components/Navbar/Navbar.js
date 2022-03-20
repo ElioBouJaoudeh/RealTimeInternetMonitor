@@ -45,9 +45,6 @@ function Navbar() {
               <NavIcon />
               INTERMETER
             </NavLogo>
-            <MobileIcon onClick={handleClick}>
-              {click ? <FaTimes /> : <FaBars />}
-            </MobileIcon>
           </NavbarContainer>
         </Nav>
       </IconContext.Provider>

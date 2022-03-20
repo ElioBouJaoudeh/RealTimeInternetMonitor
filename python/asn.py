@@ -1,11 +1,14 @@
 from asyncio import events
 import requests
 import json
-from ripe.atlas.sagan import SslResult
+# from ripe.atlas.sagan import SslResult
 import datetime
 import time
+from requests import get
+from flask import Flask
 
-
+app=Flask(__name__)
+@app.route("/as")
 
 def asn_info():
     dictionary = {}
@@ -69,87 +72,84 @@ def asn_info():
         with open("asn.json", "w") as outfile:
             json.dump(dictionary, outfile)
 
+if __name__=="__main__":
+    app.run(debug=True)
 
-def event():
-    dict = {}
+# def event():
+#     dict = {}
 
-    previous_date = datetime.datetime.today() - datetime.timedelta(days=1)
-    times = str(int(round(previous_date.timestamp())))
+#     previous_date = datetime.datetime.today() - datetime.timedelta(days=1)
+#     times = str(int(round(previous_date.timestamp())))
 
-    curr_date = datetime.datetime.now()
-    times1 = str(int(round(curr_date.timestamp())))
+#     curr_date = datetime.datetime.now()
+#     times1 = str(int(round(curr_date.timestamp())))
 
-    url = 'https://ioda.caida.org/ioda/data/events?from=' + \
-        times+'&until='+times1+'&human=true&meta=country/LB'
-    events = requests.get(url).json()
+#     url = 'https://ioda.caida.org/ioda/data/events?from=' + \
+#         times+'&until='+times1+'&human=true&meta=country/LB'
+#     events = requests.get(url).json()
 
-    start_time = events["queryParameters"]["from"]
-    end_time = events["queryParameters"]["until"]
+#     start_time = events["queryParameters"]["from"]
+#     end_time = events["queryParameters"]["until"]
 
-    timestamp = datetime.datetime.fromtimestamp(int(start_time))
-    start = timestamp.strftime('%Y-%m-%d %H:%M:%S')
+#     timestamp = datetime.datetime.fromtimestamp(int(start_time))
+#     start = timestamp.strftime('%Y-%m-%d %H:%M:%S')
 
-    timestamp1 = datetime.datetime.fromtimestamp(int(end_time))
-    end = timestamp1.strftime('%Y-%m-%d %H:%M:%S')
+#     timestamp1 = datetime.datetime.fromtimestamp(int(end_time))
+#     end = timestamp1.strftime('%Y-%m-%d %H:%M:%S')
 
-    print("Events occured:")
-    list_events = events["data"]["events"]
-    print(list_events)
-    dict["Events"] = list_events
+#     print("Events occured:")
+#     list_events = events["data"]["events"]
+#     print(list_events)
+#     dict["Events"] = list_events
 
-    print("Country:")
-    place = events["queryParameters"]["meta"]
-    print(place)
-    dict["Country"] = place
+#     print("Country:")
+#     place = events["queryParameters"]["meta"]
+#     print(place)
+#     dict["Country"] = place
 
-    print("Start time:")
-    print(start)
-    dict["Start-time"] = start
-    print("End time:")
-    print(end)
-    dict["End-time"] = end
+#     print("Start time:")
+#     print(start)
+#     dict["Start-time"] = start
+#     print("End time:")
+#     print(end)
+#     dict["End-time"] = end
 
-    with open("events.json", "w") as outfile:
-        json.dump(dict, outfile)
-
-
-def alert():
-    dict = {}
-
-    curr_date = datetime.datetime.now()
-    # print(curr_date)
-    timestamp = str(int(round(curr_date.timestamp())))
-    # print(timestamp)
-
-    url = 'https://ioda.caida.org/ioda/data/alerts?from='+timestamp + \
-        '&until='+timestamp+'&annotateMeta=true&human=true&meta=country/LB'
-    alerts = requests.get(url).json()
-
-    start_time = alerts["queryParameters"]["from"]
-    end_time = alerts["queryParameters"]["until"]
-
-    timestamp1 = datetime.datetime.fromtimestamp(int(start_time))
-    start = timestamp1.strftime('%Y-%m-%d %H:%M:%S')
-
-    timestamp2 = datetime.datetime.fromtimestamp(int(end_time))
-    end = timestamp2.strftime('%Y-%m-%d %H:%M:%S')
-
-    print("Alerts:")
-    list_alerts = alerts["data"]["alerts"]
-    print(list_alerts)
-    dict["Alerts"] = list_alerts
-
-    print("Start time:")
-    print(start)
-    dict["Start-time"] = start
-    print("End time:")
-    print(end)
-    dict["End-time"] = end
-
-    with open("alerts.json", "w") as outfile:
-        json.dump(dict, outfile)
+#     with open("events.json", "w") as outfile:
+#         json.dump(dict, outfile)
 
 
-event()
-alert()
-asn_info()
+# def alert():
+#     dict = {}
+
+#     curr_date = datetime.datetime.now()
+#     # print(curr_date)
+#     timestamp = str(int(round(curr_date.timestamp())))
+#     # print(timestamp)
+
+#     url = 'https://ioda.caida.org/ioda/data/alerts?from='+timestamp + \
+#         '&until='+timestamp+'&annotateMeta=true&human=true&meta=country/LB'
+#     alerts = requests.get(url).json()
+
+#     start_time = alerts["queryParameters"]["from"]
+#     end_time = alerts["queryParameters"]["until"]
+
+#     timestamp1 = datetime.datetime.fromtimestamp(int(start_time))
+#     start = timestamp1.strftime('%Y-%m-%d %H:%M:%S')
+
+#     timestamp2 = datetime.datetime.fromtimestamp(int(end_time))
+#     end = timestamp2.strftime('%Y-%m-%d %H:%M:%S')
+
+#     print("Alerts:")
+#     list_alerts = alerts["data"]["alerts"]
+#     print(list_alerts)
+#     dict["Alerts"] = list_alerts
+
+#     print("Start time:")
+#     print(start)
+#     dict["Start-time"] = start
+#     print("End time:")
+#     print(end)
+#     dict["End-time"] = end
+
+#     with open("alerts.json", "w") as outfile:
+#         json.dump(dict, outfile)
