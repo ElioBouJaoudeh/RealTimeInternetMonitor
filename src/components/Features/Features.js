@@ -17,7 +17,6 @@ import {
   FDesc
 } from './Features.elements';
 
-
 const dataa = createContext();
 function Features() {
   const [data,setData]=useState([{}])

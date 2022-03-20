@@ -1,9 +1,11 @@
 import React,{useState,useEffect} from "react";
 import { dataa } from "./Features";
+import './Visibility.css';
 
 function Visibility() {
   return (
     <div className="visibility-container">
+      <video src='/videos/blue.mp4' autoPlay loop muted />
       <h1>Track your visibilty</h1>
       <br />
       <p>Here you'll find some info about your IP address</p>
@@ -15,7 +17,6 @@ function Visibility() {
           }}
         </dataa.Consumer>
       </>
-
     <div>
     {/* {(typeof data.ip === 'undefined') ? (
       <p>Loading...</p>
@@ -25,9 +26,7 @@ function Visibility() {
       ))
     )} */}
       
-    </div>
-
-     
+    </div>     
     </div>
   );
 }
