@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import Data from "../../jsonObject/sampleip.json";
+import React,{useState,useEffect} from "react";
+import { dataa } from "./Features";
 
 function Visibility() {
   return (
@@ -8,17 +8,26 @@ function Visibility() {
       <br />
       <p>Here you'll find some info about your IP address</p>
       <br />
-      {Data.map((post) => {
-        return (
-          <>
-            <p>Your prefix: {post.prefix}</p>
-            <p>Country: {post.country}</p>
-            <p>Internet service provider: {post.isp}</p>
-            <p>Autonomous system (AS): {post.asnname}</p>
-            <p>Autonomous system code: {post.asncode}</p>
-          </>
-        );
-      })}
+      <>
+      <dataa.Consumer>
+          {(fname) => {
+            return console.log(fname);
+          }}
+        </dataa.Consumer>
+      </>
+
+    <div>
+    {/* {(typeof data.ip === 'undefined') ? (
+      <p>Loading...</p>
+    ):(
+      dataa.ip.map((member,i) => (
+        <p key={i}>{member}</p>
+      ))
+    )} */}
+      
+    </div>
+
+     
     </div>
   );
 }

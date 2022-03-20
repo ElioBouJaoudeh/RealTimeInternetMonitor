@@ -1,17 +1,20 @@
 import requests
 import json
-from ripe.atlas.sagan import SslResult
-import socket
-from datetime import datetime
 from requests import get
+from flask import Flask
 
-ip = {}
-list = []
+app=Flask(__name__)
+@app.route("/ip")
+
+
+
+
 # private=socket.gethostbyname(socket.gethostname())
 # adr="185.185.179.8"
 
 
 def ip_info():
+    ip = {}
     adr = get('https://api.ipify.org').text
 
     sourceip = "https://stat.ripe.net/data/whois/data.json?resource="+adr+"%2F24"
@@ -27,7 +30,7 @@ def ip_info():
     pk = requests.get(rpki).json()
     isp = responseip["data"]["records"][0][1]["value"]
     ip["isp"] = isp
-    country = responseip["data"]["records"][0][3]["value"]
+    country = responseip["data"]["records"][0][2]["value"]
     ip["country"] = country
     ipp = responseip["data"]["irr_records"][0][0]["value"]
     ip["ip"] = ipp
@@ -64,10 +67,10 @@ def ip_info():
         ip["ipv6"] = per
         print(str(per)+"% Visibility ipv6")
 
-    list.append(ip)
+    with open("ip.json", "w") as outfile:
+        json.dump(ip, outfile)
 
-    with open("sampleip.json", "w") as outfile:
-        json.dump(list, outfile)
+    return ip
 
-
-ip_info()
+if __name__=="__main__":
+    app.run(debug=True)

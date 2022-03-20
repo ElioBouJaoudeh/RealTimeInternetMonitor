@@ -5,69 +5,69 @@ from ripe.atlas.sagan import SslResult
 import datetime
 import time
 
-# LIBANTELECOM
-ASN1 = "42020"
-# MTCTOUCH
-ASN2 = "38999"
 
 
-def asn_info(asn):
+def asn_info():
     dictionary = {}
     sous_dictionnaire = {}
+    sourceasn="https://stat.ripe.net/data/country-resource-list/data.json?resource=LB"
+    responseasn = requests.get(sourceasn).json()
+    ASN=responseasn["data"]["resources"]["asn"]
 
-    source = "https://stat.ripe.net/data/visibility/data.json?include=peers_seeing&resource="+asn
-    source2 = "https://stat.ripe.net/data/routing-status/data.json?resource="+asn
-    source3 = "https://stat.ripe.net/data/whois/data.json?resource="+asn
-    source1 = 'https://ihr.iijlab.net/ihr/api/networks/?number='+asn
+    for asn in ASN:
+        source = "https://stat.ripe.net/data/visibility/data.json?include=peers_seeing&resource="+asn
+        source2 = "https://stat.ripe.net/data/routing-status/data.json?resource="+asn
+        source3 = "https://stat.ripe.net/data/whois/data.json?resource="+asn
+        source1 = 'https://ihr.iijlab.net/ihr/api/networks/?number='+asn
 
-    ipv4_seeing = 0
-    ipv4_total = 0
-    ipv6_seeing = 0
-    ipv6_total = 0
-    response1 = requests.get(source2).json()
-    response2 = requests.get(source3).json()
-    response3 = requests.get(source1).json()
+        ipv4_seeing = 0
+        ipv4_total = 0
+        ipv6_seeing = 0
+        ipv6_total = 0
+        response1 = requests.get(source2).json()
+        response2 = requests.get(source3).json()
+        response3 = requests.get(source1).json()
 
-    print("Time:")
-    time = response1["data"]["last_seen"]["time"]
-    sous_dictionnaire["time"] = time
-    print(time)
+        print("Time:")
+        time = response1["data"]["last_seen"]["time"]
+        sous_dictionnaire["time"] = time
+        print(time)
 
-    name = response2["data"]["records"][0][1]["value"]
-    print("ASN name:"+name)
-    print(response1["data"]["visibility"])
-    sous_dictionnaire["name"] = name
-    print(name)
+        name = response2["data"]["records"][0][1]["value"]
+        print("ASN name:"+name)
+        print(response1["data"]["visibility"])
+        sous_dictionnaire["name"] = name
+        print(name)
 
-    disco = response3["results"][0]["disco"]
-    print("Disconnection:"+str(disco))
-    sous_dictionnaire["disconnection"] = disco
+        disco = response3["results"][0]["disco"]
+        print("Disconnection:"+str(disco))
+        sous_dictionnaire["disconnection"] = disco
 
-    for i in response1:
-        ipv4_seeing = response1["data"]["visibility"]["v4"]["ris_peers_seeing"]
-        ipv4_total = response1["data"]["visibility"]["v4"]["total_ris_peers"]
-    if (ipv4_seeing == ipv4_total):
-        sous_dictionnaire["ipv4"] = 100
-        print("100% visibility ipv4")
-    else:
-        per = (ipv4_seeing*100)/ipv4_total
-        sous_dictionnaire["ipv4"] = per
-        print(str(per)+"% Visibility ipv4")
+        for i in response1:
+            ipv4_seeing = response1["data"]["visibility"]["v4"]["ris_peers_seeing"]
+            ipv4_total = response1["data"]["visibility"]["v4"]["total_ris_peers"]
+        if (ipv4_seeing == ipv4_total):
+            sous_dictionnaire["ipv4"] = 100
+            print("100% visibility ipv4")
+        else:
+            per = (ipv4_seeing*100)/ipv4_total
+            sous_dictionnaire["ipv4"] = per
+            print(str(per)+"% Visibility ipv4")
 
-    for i in response1:
-        ipv6_seeing = response1["data"]["visibility"]["v6"]["ris_peers_seeing"]
-        ipv6_total = response1["data"]["visibility"]["v6"]["total_ris_peers"]
-    if (ipv6_seeing == ipv6_total):
-        sous_dictionnaire["ipv6"] = 100
-        print("100% visibility ipv6")
-    else:
-        per = (ipv6_seeing*100)/ipv6_total
-        sous_dictionnaire["ipv6"] = per
-        print(str(per)+"% Visibility ipv6")
+        for i in response1:
+            ipv6_seeing = response1["data"]["visibility"]["v6"]["ris_peers_seeing"]
+            ipv6_total = response1["data"]["visibility"]["v6"]["total_ris_peers"]
+        if (ipv6_seeing == ipv6_total):
+            sous_dictionnaire["ipv6"] = 100
+            print("100% visibility ipv6")
+        else:
+            per = (ipv6_seeing*100)/ipv6_total
+            sous_dictionnaire["ipv6"] = per
+            print(str(per)+"% Visibility ipv6")
 
-    dictionary[asn] = sous_dictionnaire
-    with open("sample.json", "w") as outfile:
-        json.dump(dictionary, outfile)
+        dictionary[asn] = sous_dictionnaire
+        with open("asn.json", "w") as outfile:
+            json.dump(dictionary, outfile)
 
 
 def event():
@@ -150,7 +150,6 @@ def alert():
         json.dump(dict, outfile)
 
 
-# event()
-# alert()
-# asn = input("Please insert the ASN number:")
-asn_info("42020")
+event()
+alert()
+asn_info()
