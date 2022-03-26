@@ -1,9 +1,9 @@
-import React,{useState,useEffect,createContext} from 'react';
-import { Button } from '../../globalStyles';
-import { AiOutlineCheckCircle } from 'react-icons/ai';
-import { GiConcentrationOrb } from 'react-icons/gi';
-import { GiWireframeGlobe,  } from 'react-icons/gi';
-import { IconContext } from 'react-icons/lib';
+import React, { useState, useEffect, createContext } from "react";
+import { Button } from "../../globalStyles";
+import { AiOutlineCheckCircle } from "react-icons/ai";
+import { GiConcentrationOrb } from "react-icons/gi";
+import { GiWireframeGlobe } from "react-icons/gi";
+import { IconContext } from "react-icons/lib";
 import {
   FSection,
   FWrapper,
@@ -13,17 +13,17 @@ import {
   FCardIcon,
   FCardInfo,
   FTitle,
-  FDesc
-} from './Features.elements';
+  FDesc,
+} from "./Features.elements";
 
 function Features() {
   return (
-    <IconContext.Provider value={{ color: '#a9b3c1', size: 64 }}>
+    <IconContext.Provider value={{ color: "#a9b3c1", size: 64 }}>
       <FSection>
         <FWrapper>
           <FHeading>Our Features</FHeading>
           <FContainer>
-            <FCard to='/visibility'>
+            <FCard to="/visibility">
               <FCardInfo>
                 <FCardIcon>
                   <AiOutlineCheckCircle />
@@ -33,8 +33,8 @@ function Features() {
                 <Button primary>Start</Button>
               </FCardInfo>
             </FCard>
-            <FCard to='/'>
-            <FCardInfo>
+            <FCard to="/">
+              <FCardInfo>
                 <FCardIcon>
                   <GiConcentrationOrb />
                 </FCardIcon>
@@ -42,8 +42,8 @@ function Features() {
                 <FDesc>Get an overview of past disruptions of your ISP</FDesc>
                 <Button primary>Start</Button>
               </FCardInfo>
-              </FCard>
-            <FCard to='/'>
+            </FCard>
+            <FCard to="/asn">
               <FCardInfo>
                 <FCardIcon>
                   <GiWireframeGlobe />
@@ -51,7 +51,7 @@ function Features() {
                 <FTitle>Global Routing</FTitle>
                 <FDesc>Check the dynamics of your ASN around the world</FDesc>
                 <Button primary>Start</Button>
-                </FCardInfo>
+              </FCardInfo>
             </FCard>
           </FContainer>
         </FWrapper>

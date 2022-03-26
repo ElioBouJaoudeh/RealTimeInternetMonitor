@@ -16,6 +16,7 @@ function App() {
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/visibility" exact component={Visibility} />
+        <Route path="/asn" exact component={ASN} />
         {/* <Route path="/as" exact component={ASN} /> */}
       </Switch>
       <Footer />
