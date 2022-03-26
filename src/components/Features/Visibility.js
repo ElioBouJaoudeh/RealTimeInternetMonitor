@@ -1,6 +1,26 @@
 import React,{useState,useEffect} from "react";
 import './Visibility.css';
 import ProgressBar from './ProgressBar';
+import styled, { createGlobalStyle } from 'styled-components';
+
+export const ButtonVis = styled.button`
+  border-radius: 4px;
+  background: ${({ primary }) => (primary ? '#07080a' : '##9aa5b3')};
+  white-space: nowrap;
+  padding: ${({ big }) => (big ? '12px 64px' : '10px 20px')};
+  color: #fff;
+  font-size: ${({ fontBig }) => (fontBig ? '20px' : '16px')};
+  outline: none;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    transition: all 0.3s ease-out;
+    background: #fff;
+    background-color: ${({ primary }) => (primary ? '#9aa5b3' : '#9aa5b3')};
+  }
+
+`;
 
 function Visibility() {
   const [dataa,setDataa]=useState([{}])
@@ -29,14 +49,30 @@ function Visibility() {
 
   const [progress, setProgress] = useState(0);
   const [color, setColor] = useState('');
-  const colorArray = ['#7ea9e1', "#ed004f", "#00fcf0", "#d2fc00", "#7bff00", "#fa6900"];
+  const colorArray = ['#fa0000', "#fa6900", "#7bff00", "#d9edfe"];
 
   const randomColor = () => {
-    return colorArray[Math.floor(Math.random() * colorArray.length)];
+    if (data["ipv4"]<50){
+      return colorArray[0];
+    }
+    else if(data["ipv4"]>=50 && data["ipv4"]<100){
+      return colorArray[1];
+    }else if(data["ipv4"]==100){
+      return colorArray[2];
+    }else{
+      return colorArray[3];
+    }
+  }
+
+  function getValue(){
+    if(typeof data.ip === 'undefined') {return 0;}
+    else{
+      return data["ipv4"];
+    }
   }
 
   const randomProgressValue = () => {
-    const progressValue = Math.floor(Math.random() * 101);
+    const progressValue = Math.floor(getValue());
     setProgress(progressValue);
     const randomProgressColor = randomColor();
     setColor(randomProgressColor);
@@ -44,12 +80,7 @@ function Visibility() {
 
   const onChange = e => {
     if (e.target.value) {
-      if (e.target.value > 100) {
-        progress = 100;
-      }
-      if (e.target.value < 0) {
-          progress = 0;
-      }
+      progress = e.target.value;
       setProgress(progress);
       const randomProgressColor = randomColor();
       setColor(randomProgressColor);
@@ -65,13 +96,18 @@ function Visibility() {
       {(typeof data.ip === 'undefined') ? (
       <p>Loading...</p>
     ):(
-        Object.keys(data).map((key, index) => ( 
-          <p key={index}> Your {key} is {data[key]}</p> 
+        Object.keys(data).map((key, index) => (
+          <p key={index}> {key} : {data[key]}</p> 
         ))
     )}
+    <div className="button-container">
+    <ButtonVis onClick={randomProgressValue}>
+          Check Visibility
+        </ButtonVis>
+    </div>
     <ProgressBar 
           progress={progress}
-          size={300}
+          size={250}
           strokeWidth={15}
           circleOneStroke='#d9edfe'
           circleTwoStroke={color}
