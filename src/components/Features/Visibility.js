@@ -1,7 +1,18 @@
 import React,{useState,useEffect} from "react";
 import './Visibility.css';
 import ProgressBar from './ProgressBar';
-import styled, { createGlobalStyle } from 'styled-components';
+import { IconContext } from "react-icons/lib";
+import styled from 'styled-components';
+import { Button } from "../../globalStyles";
+import { Container } from '../../globalStyles';
+
+export const VisContainer = styled(Container)`
+  display: flex;
+  justify-content: space-between;
+  height: 700px;
+
+  ${Container}
+`;
 
 export const ButtonVis = styled.button`
   border-radius: 4px;
@@ -90,9 +101,10 @@ function Visibility() {
   }
 
   return (
+    <VisContainer>
     <div className="visibility-container">
       <video src='/videos/blue.mp4' autoPlay loop muted />
-      <h1>You will find some general information about your connection below:</h1>
+      <h1>General information about your connection:</h1>
       {(typeof data.ip === 'undefined') ? (
       <p>Loading...</p>
     ):(
@@ -101,9 +113,9 @@ function Visibility() {
         ))
     )}
     <div className="button-container">
-    <ButtonVis onClick={randomProgressValue}>
+    <Button primary onClick={randomProgressValue}>
           Check Visibility
-        </ButtonVis>
+        </Button>
     </div>
     <ProgressBar 
           progress={progress}
@@ -113,6 +125,7 @@ function Visibility() {
           circleTwoStroke={color}
         />
     </div>
+    </VisContainer>
   );
 }
 

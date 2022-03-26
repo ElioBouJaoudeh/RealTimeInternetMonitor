@@ -1,7 +1,6 @@
 .visibility-container {
-    height: 650px;
-    width: 200vh;
-    padding: 20px 0 10px;
+    height: 700px;
+    width: 400vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -14,50 +13,30 @@
     height: 100%;
     position: fixed;
     z-index: -1;
+    top: 0;
+    left:0;
   }
 
 .visibility-container > h1{
     color: white;
     padding-top: 0%;
-    padding-left: 10%;
 }
 
 .visibility-container > p{
     color: white;
     padding-top: 0%;
-    padding-left: 10%;
 }
 
 .button-container {
     height: 100px;
     width: 20vh;
-    margin-left: 150px;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.Bbuttonvis{
-    border-radius: 4px;
-    background: #07080a;
-    padding: 10px;
-    padding-left: 10%;
-    width: 100px;
-    height: 100px;
-    color: #fff;
-    font-size: 20px;
-    outline: none;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease-out;
-  }
-  
-  .settingsSubmitButton:hover {
-    background-color: rgb(124, 33, 33);
-}
-
 @media screen and (max-width: 800px) {
     .left, .main, .right {
-      width: 100%; /* The width is 100%, when the viewport is 800px or smaller */
+      width: 100%;
     }
   }

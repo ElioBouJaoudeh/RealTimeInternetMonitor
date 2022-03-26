@@ -7,12 +7,6 @@ import {
   NavbarContainer,
   NavLogo,
   NavIcon,
-  MobileIcon,
-  NavMenu,
-  NavItem,
-  NavItemBtn,
-  NavLinks,
-  NavBtnLink
 } from './Navbar.elements';
 
 function Navbar() {
