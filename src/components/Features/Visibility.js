@@ -34,17 +34,7 @@ export const ButtonVis = styled.button`
 `;
 
 function Visibility() {
-  const [dataa,setDataa]=useState([{}])
-  useEffect(()=>{
-    fetch("/as").then(
-      res=>res.json()
-    ).then(
-      data => {
-        setDataa(dataa)
-        console.log(dataa)
-      }
-    )
-  },[])
+
 
   const [data,setData]=useState([{}])
   useEffect(()=>{
