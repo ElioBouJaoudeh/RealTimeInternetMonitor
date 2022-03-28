@@ -14,25 +14,6 @@ export const VisContainer = styled(Container)`
   ${Container}
 `;
 
-export const ButtonVis = styled.button`
-  border-radius: 4px;
-  background: ${({ primary }) => (primary ? '#07080a' : '##9aa5b3')};
-  white-space: nowrap;
-  padding: ${({ big }) => (big ? '12px 64px' : '10px 20px')};
-  color: #fff;
-  font-size: ${({ fontBig }) => (fontBig ? '20px' : '16px')};
-  outline: none;
-  border: none;
-  cursor: pointer;
-
-  &:hover {
-    transition: all 0.3s ease-out;
-    background: #fff;
-    background-color: ${({ primary }) => (primary ? '#9aa5b3' : '#9aa5b3')};
-  }
-
-`;
-
 function Visibility() {
 
 

@@ -1,1 +1,1 @@
-web: python ip.py & python asn.py & wait -n
+web: gunicorn app:ip
