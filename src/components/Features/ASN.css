@@ -1,28 +1,10 @@
-.ASN-container {
-    height: 700px;
-    width: 200vh;
-    padding: 20px 0 10px;
-    display: flex;
+.containerupload {
+    margin: 80px;
     flex-direction: column;
+    padding-top: 12px;
     justify-content: center;
-}
-
-.ASN-container > video {
-    object-fit:cover;
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    z-index: -1;
+    align-items: left;
+    object-fit: contain;
+    grid-template-columns: 1fr 1fr;
+    min-height: 57rem;
   }
-
-.ASN-container > h1{
-    color: white;
-    padding-top: 0%;
-    padding-left: 10%;
-}
-
-.ASN-container > p{
-    color: white;
-    padding-top: 0%;
-    padding-left: 10%;
-}
