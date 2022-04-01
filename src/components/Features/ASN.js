@@ -1,15 +1,80 @@
 import React, { useState, useEffect } from "react";
-import "./Visibility.css";
-import styled, { keyframes } from "styled-components";
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 import { Container } from "../../globalStyles";
 
 export const ASNContainer = styled(Container)`
   display: flex;
   justify-content: space-between;
-  height:700px;
-  font-size:20px;
+  height:100%;
+  font-size:15px;
 
   ${Container}
+`;
+
+export const Headline = styled.h1`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size:17px;
+  margin: 24px;
+
+  @media screen and (max-width: 960px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+`;
+
+export const FContainer = styled.div`
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  
+  @media screen and (max-width: 960px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+`;
+
+export const FHeading = styled.p`
+  color: #fff;
+  font-size: 16px;
+  padding: 15px;
+  margin-left: 24px;
+`;
+
+export const FCard = styled(Link)`
+  background: #2c4151;
+  box-shadow: 0 6px 20px rgba(56, 125, 255, 0.2);
+  width: 40%;
+  height: 100%;
+  text-decoration: none;
+  border-radius: 4px;
+
+  &:nth-child(2) {
+    margin: 24px;
+  }
+
+  &:hover {
+    transform: scale(1.06);
+    transition: all 0.3s ease-out;
+    color: white;
+  }
+
+  @media screen and (max-width: 960px) {
+    width: 90%;
+
+    &:hover {
+      transform: none;
+    }
+  }
 `;
 
 function ASN() {
@@ -42,8 +107,11 @@ function ASN() {
   return (
     <ASNContainer>
       <div className="visibility-container">
+        <Headline><h1>General information about your connection:</h1></Headline>
         <video src="/videos/blue.mp4" autoPlay loop muted />
-        <h1>General information about your connection:</h1>
+        <FContainer>
+        <FCard>
+        <FHeading>
         <p>Your Autonomous System's available prefixes:</p>
         {Object.keys(dataa).length === 0 ? (
           <p>Loading...</p>
@@ -52,6 +120,10 @@ function ASN() {
             <p key={index}> {val[index]}</p>
           ))
         )}
+        </FHeading>
+        </FCard>
+        <FCard>
+        <FHeading>
         {Object.keys(dataa).length === 0 ? (
           <p>Loading...</p>
         ) : (
@@ -59,6 +131,9 @@ function ASN() {
             <p key={index}> {keystaken[key]}: {otherval[key]}</p>
           ))
         )}
+        </FHeading>
+        </FCard>
+        </FContainer>
       </div>
     </ASNContainer>
   );
