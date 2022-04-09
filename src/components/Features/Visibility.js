@@ -19,13 +19,7 @@ function Visibility() {
 
   const [data,setData]=useState([{}])
   useEffect(()=>{
-    fetch("/ip", {
-      headers : { 
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-       }
-
-    }).then(
+    fetch("/ip").then(
       res=>res.json()
     ).then(
       data => {
