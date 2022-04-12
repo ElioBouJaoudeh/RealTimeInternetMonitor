@@ -84,7 +84,7 @@ function ASN() {
   const [val, setArray] = useState([]);
   const [keystaken, setKeys] = useState([]);
   useEffect(() => {
-    fetch("/as")
+    fetch("http://localhost:5000/as")
       .then((res) => res.json())
       .then((dataa) => {
         for (const key of Object.keys(dataa["42020"]["List of prefixes"])){
