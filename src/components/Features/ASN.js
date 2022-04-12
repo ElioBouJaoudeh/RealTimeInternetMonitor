@@ -107,33 +107,48 @@ function ASN() {
 
   return (
     <ASNContainer>
-      <div className="asn-container">
-        <Headline><h1>General information about your connection:</h1></Headline>
+      <div className="visibility-container">
+        <Headline>
+          <h1>General information about your connection:</h1>
+        </Headline>
         <video src="/videos/blue.mp4" autoPlay loop muted />
-        <FContainer>
-        <FCard>
-        <FHeading>
-        <p>Your Autonomous System's available prefixes:</p>
-        {Object.keys(dataa).length === 0 ? (
-          <p>Loading...</p>
-        ) : (
-          Object.keys(val).map((key, index) => (
-            <p key={index}> {val[index]}</p>
-          ))
-        )}
-        </FHeading>
-        </FCard>
-        <FCard>
-        <FHeading>
-        {Object.keys(dataa).length === 0 ? (
-          <p>Loading...</p>
-        ) : (
-          Object.keys(otherval).map((key, index) => (
-            <p key={index}> {keystaken[key]}: {otherval[key]}</p>
-          ))
-        )}
-        </FHeading>
-        </FCard>
+        <FContainer position="relative">
+          <FCard>
+            <FHeading>
+              {Object.keys(dataa).length === 0 ? (
+                <p>Loading...</p>
+              ) : (
+                <p>
+                  {" "}
+                  Your Autonomous System is : &nbsp;&nbsp; {otherval[4]}
+                  <br />
+                  Any disconnections occured?{" "}
+                  {otherval[1] === false ? <p>No </p> : <p> Yes </p>}
+                Number of Prefixes: {otherval[0]}
+                <br />
+                Ipv4 Visibility: {otherval[2]}
+                <br />
+                Ipv6 Visibility: {otherval[3]}
+              </p>
+              )}
+            </FHeading>
+          </FCard>
+          <FCard>
+            <FHeading>
+              <p>Your Autonomous System's available prefixes:</p>
+              <br />
+              {Object.keys(dataa).length === 0 ? (
+                <p>Loading...</p>
+              ) : (
+                Object.keys(val).map((key, index) => (
+                  <p key={index}>
+                    {" "}
+                    <li>{val[index]}</li>
+                  </p>
+                ))
+              )}
+            </FHeading>
+          </FCard>
         </FContainer>
       </div>
     </ASNContainer>
