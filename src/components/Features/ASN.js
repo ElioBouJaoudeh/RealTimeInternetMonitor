@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Container } from "../../globalStyles";
+import './ASN.css';
 
 export const ASNContainer = styled(Container)`
   display: flex;
   justify-content: space-between;
-  height:100%;
+  height: 100%;
   font-size:15px;
 
   ${Container}
@@ -106,7 +107,7 @@ function ASN() {
 
   return (
     <ASNContainer>
-      <div className="visibility-container">
+      <div className="asn-container">
         <Headline><h1>General information about your connection:</h1></Headline>
         <video src="/videos/blue.mp4" autoPlay loop muted />
         <FContainer>
