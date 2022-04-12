@@ -19,7 +19,7 @@ function Visibility() {
 
   const [data,setData]=useState([{}])
   useEffect(()=>{
-    fetch("/ip").then(
+    fetch("https://intermeterflaskserver.herokuapp.com/ip").then(
       res=>res.json()
     ).then(
       data => {
