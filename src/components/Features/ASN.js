@@ -84,7 +84,7 @@ function ASN() {
   const [val, setArray] = useState([]);
   const [keystaken, setKeys] = useState([]);
   useEffect(() => {
-    fetch("https://intermeterflaskserver.herokuapp.com/as")
+    fetch("/as")
       .then((res) => res.json())
       .then((dataa) => {
         for (const key of Object.keys(dataa["42020"]["List of prefixes"])){
