@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Container } from "../../globalStyles";
+import "./ASN.css";
 
 export const ASNContainer = styled(Container)`
   display: flex;
@@ -82,7 +83,7 @@ function ASN() {
   const [val, setArray] = useState([]);
   const [keystaken, setKeys] = useState([]);
   useEffect(() => {
-    fetch("/as")
+    fetch("https://intermeterflaskserver.herokuapp.com/as")
       .then((res) => res.json())
       .then((dataa) => {
         for (const key of Object.keys(dataa["42020"]["List of prefixes"])) {
@@ -122,16 +123,6 @@ function ASN() {
                   <br />
                   Any disconnections occured?{" "}
                   {otherval[1] === false ? <p>No </p> : <p> Yes </p>}
-                </p>
-              )}
-            </FHeading>
-          </FCard>
-          <FCard>
-            <FHeading>
-              {Object.keys(dataa).length === 0 ? (
-                <p>Loading...</p>
-              ) : (
-                <p>
                   Number of Prefixes: {otherval[0]}
                   <br />
                   Ipv4 Visibility: {otherval[2]}
@@ -141,9 +132,6 @@ function ASN() {
               )}
             </FHeading>
           </FCard>
-        </FContainer>
-        <br />
-        <FContainer>
           <FCard>
             <FHeading>
               <p>Your Autonomous System's available prefixes:</p>
