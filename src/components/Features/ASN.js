@@ -11,7 +11,7 @@ let visipv6;
 export const ASNContainer = styled(Container)`
   display: flex;
   justify-content: space-between;
-  height: 100%;
+  height: 850px;
   font-size: 15px;
 
   ${Container}
