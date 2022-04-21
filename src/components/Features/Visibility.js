@@ -1,7 +1,6 @@
 import React,{useState,useEffect} from "react";
 import './Visibility.css';
 import ProgressBar from './ProgressBar';
-import { IconContext } from "react-icons/lib";
 import styled from 'styled-components';
 import { Button } from "../../globalStyles";
 import { Container } from '../../globalStyles';
@@ -15,8 +14,6 @@ export const VisContainer = styled(Container)`
 `;
 
 function Visibility() {
-
-
   const [data,setData]=useState([{}])
   useEffect(()=>{
     fetch("https://intermeterflaskserver.herokuapp.com/ip").then(

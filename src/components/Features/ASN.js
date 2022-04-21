@@ -4,6 +4,10 @@ import styled from 'styled-components';
 import { Container } from "../../globalStyles";
 import './ASN.css';
 
+let asn;
+let visipv4;
+let visipv6;
+
 export const ASNContainer = styled(Container)`
   display: flex;
   justify-content: space-between;
@@ -17,7 +21,7 @@ export const Headline = styled.h1`
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
-  font-size:17px;
+  font-size:15px;
   margin: 24px;
 
   @media screen and (max-width: 960px) {
@@ -78,30 +82,74 @@ export const FCard = styled(Link)`
   }
 `;
 
+const Progress = ({done}) => {
+	const [style, setStyle] = React.useState({});
+	
+	setTimeout(() => {
+		const newStyle = {
+			opacity: 1,
+			width: `${done}%`
+		}
+		
+		setStyle(newStyle);
+	}, 200);
+	
+	return (
+		<div className="progress">
+			<div className="progress-done" style={style}>
+				{done}%
+			</div>
+		</div>
+	)
+}
+
 function ASN() {
+  const [data,setData]=useState([{}])
+  useEffect(()=>{
+    fetch("https://intermeterflaskserver.herokuapp.com/ip").then(
+      res=>res.json()
+    ).then(
+      data => {
+        setData(data)
+        console.log(typeof(data))
+        console.log(data)
+      }
+    )
+  },[])
+
+  asn = data['asncode'];
   const [otherval, setOtherArray] = useState([]);
-  const [dataa, setData] = useState([{}]);
+  const [dataa, setData1] = useState([{}]);
   const [val, setArray] = useState([]);
   const [keystaken, setKeys] = useState([]);
+  const [couplekeystaken, setcoupleKeys] = useState([]);
   useEffect(() => {
     fetch("https://intermeterflaskserver.herokuapp.com/as")
       .then((res) => res.json())
       .then((dataa) => {
-        for (const key of Object.keys(dataa["42020"]["List of prefixes"])){
-          val.push(dataa["42020"]["List of prefixes"][key]);
+        console.log(asn);
+        for (const key of Object.keys(dataa[asn]["List of prefixes"])){
+          val.push(dataa[asn]["List of prefixes"][key]);
         }
-        delete dataa["42020"]["List of prefixes"];
-        for (const key of Object.keys(dataa["42020"])){
-          otherval.push(dataa["42020"][key]);
+        delete dataa[asn]["List of prefixes"];
+        for (const key of Object.keys(dataa[asn])){
+          otherval.push(dataa[asn][key]);
         }
-        for (const key of Object.keys(dataa["42020"])){
+        for (const key of Object.keys(dataa[asn])){
           keystaken.push(key);
         }
-        setData(dataa);
+        for (let i = 0; i < val.length/4; i++) {
+          couplekeystaken.push(val[i]);
+        }
+        visipv4 = otherval[2].toString();
+        visipv6 = otherval[3].toString();
+        console.log(typeof(visipv4));
+        console.log(visipv6);
+        setData1(dataa);
         setArray(val);
         setOtherArray(otherval);
         setKeys(keystaken);
-        console.log(keystaken);
+        setcoupleKeys(couplekeystaken);
       });
   }, []);
 
@@ -126,29 +174,31 @@ function ASN() {
                   {otherval[1] === false ? <p>No </p> : <p> Yes </p>}
                 Number of Prefixes: {otherval[0]}
                 <br />
-                Ipv4 Visibility: {otherval[2]}
+                Ipv4 Visibility:
+                <Progress done = {visipv4} />
                 <br />
-                Ipv6 Visibility: {otherval[3]}
-              </p>
+                Ipv6 Visibility: 
+                <Progress done = {visipv6}/>
+                </p>
               )}
             </FHeading>
           </FCard>
           <FCard>
             <FHeading>
-              <p>Your Autonomous System's available prefixes:</p>
+              <p>Some of your Autonomous System's prefixes:</p>
               <br />
               {Object.keys(dataa).length === 0 ? (
                 <p>Loading...</p>
               ) : (
-                Object.keys(val).map((key, index) => (
+                Object.keys(couplekeystaken).map((key, index) => (
                   <p key={index}>
                     {" "}
-                    <li>{val[index]}</li>
+                    <li>{couplekeystaken[index]}</li>
                   </p>
                 ))
               )}
             </FHeading>
-          </FCard>
+            </FCard>
         </FContainer>
       </div>
     </ASNContainer>
