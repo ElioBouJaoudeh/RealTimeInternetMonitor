@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 import { Container } from "../../globalStyles";
-import './ASN.css';
+import "./ASN.css";
 
 let asn;
 let visipv4;
@@ -12,7 +12,7 @@ export const ASNContainer = styled(Container)`
   display: flex;
   justify-content: space-between;
   height: 100%;
-  font-size:15px;
+  font-size: 15px;
 
   ${Container}
 `;
@@ -31,14 +31,13 @@ export const Headline = styled.h1`
     align-items: center;
     width: 100%;
   }
-
 `;
 
 export const FContainer = styled.div`
   display: flex;
   justify-content: left;
   align-items: center;
-  
+
   @media screen and (max-width: 960px) {
     display: flex;
     flex-direction: column;

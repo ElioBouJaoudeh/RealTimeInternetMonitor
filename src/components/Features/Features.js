@@ -33,7 +33,7 @@ function Features() {
                 <Button primary>Start</Button>
               </FCardInfo>
             </FCard>
-            <FCard to="/">
+            <FCard to="/hist">
               <FCardInfo>
                 <FCardIcon>
                   <GiConcentrationOrb />

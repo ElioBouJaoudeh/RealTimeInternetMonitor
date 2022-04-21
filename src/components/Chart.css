@@ -1,0 +1,21 @@
+body{
+    font-family: arial;
+    font-size: 16px;
+    margin: 0;
+    background: white;
+}
+
+.container{
+    display: flex;
+    justify-content: space-around;
+    width: 90%;
+}
+
+h1{
+    text-align: center;
+    font-size: 46px;
+}
+
+#canvas{
+    width: 100%;
+}
