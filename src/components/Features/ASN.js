@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { Button } from "../../globalStyles";
 import { Container } from "../../globalStyles";
 import "./ASN.css";
 
@@ -11,7 +12,7 @@ let visipv6;
 export const ASNContainer = styled(Container)`
   display: flex;
   justify-content: space-between;
-  height: 850px;
+  height: 100%
   font-size: 15px;
 
   ${Container}
@@ -21,7 +22,7 @@ export const Headline = styled.h1`
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
-  font-size:15px;
+  font-size:13px;
   margin: 24px;
 
   @media screen and (max-width: 960px) {
@@ -56,6 +57,7 @@ export const FHeading = styled.p`
 
 export const FCard = styled(Link)`
   background: #2c4151;
+
   box-shadow: 0 6px 20px rgba(56, 125, 255, 0.2);
   width: 40%;
   height: 100%;
@@ -154,7 +156,7 @@ function ASN() {
 
   return (
     <ASNContainer>
-      <div className="visibility-container">
+      <div className="asn-container">
         <Headline>
           <h1>General information about your connection:</h1>
         </Headline>
@@ -178,6 +180,10 @@ function ASN() {
                 <br />
                 Ipv6 Visibility: 
                 <Progress done = {visipv6}/>
+                <br/>
+                <Link to='/asngraph'>
+                <Button primary > ASN GRAPH </Button>
+                </Link>
                 </p>
               )}
             </FHeading>
@@ -185,7 +191,7 @@ function ASN() {
           <FCard>
             <FHeading>
               <p>Some of your Autonomous System's prefixes:</p>
-              <br />
+              <br/>
               {Object.keys(dataa).length === 0 ? (
                 <p>Loading...</p>
               ) : (
@@ -198,7 +204,9 @@ function ASN() {
               )}
             </FHeading>
             </FCard>
+            
         </FContainer>
+        
       </div>
     </ASNContainer>
   );

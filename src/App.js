@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 import { Navbar, Footer } from "./components";
 import Chart from "./components/Chart";
+import ASNG from "./components/Features/ASNG";
 import LineChart from "./components/Chart";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
       <Navbar />
       <Switch>
         <Route path="/" exact component={Home} />
+        <Route path="/asngraph" exact component={ASNG} />
         <Route path="/visibility" exact component={Visibility} />
         <Route path="/asn" exact component={ASN} />
         <Route path="/hist" exact component={LineChart} />

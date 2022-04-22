@@ -6,7 +6,7 @@
 	position: relative;
 	margin: 15px 0;
 	height: 30px;
-	width: 80%;
+	width: 100%;
 }
 
 .progress-done {
@@ -35,7 +35,7 @@
   }
 
   .asn-container {
-    height: 900px;
+    height: 1050px;
     width: 400vh;
     display: flex;
     flex-direction: column;
@@ -48,7 +48,7 @@
     height: 100%;
     position: fixed;
     z-index: -1;
-    top: 0;
+    top:0;
     left:0;
   }
 
