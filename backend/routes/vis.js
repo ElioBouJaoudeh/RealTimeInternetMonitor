@@ -8,16 +8,14 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
-    const prefix = req.body.prefix;
-    const date = req.body.date;
-    const withdrawals = req.body.withdrawals;
-    const nb_ann = Number(req.body.nb_ann);
+    const resource = req.body.resource;
+    const starttime = req.body.starttime;
+    const announcements = Number(req.body.announcements);
   
     const newVis = new Vis({
-      prefix,
-      date,
-      withdrawals,
-      nb_ann,
+      resource,
+      starttime,
+      announcements,
     });
   
     newVis.save()
@@ -40,10 +38,9 @@ router.route('/add').post((req, res) => {
   router.route('/update/:id').post((req, res) => {
     Vis.findById(req.params.id)
       .then(vis => {
-        vis.prefix = req.body.prefix;
-        vis.date = req.body.date;
-        vis.withdrawals = req.body.withdrawals;
-        vis.nb_ann = Number(req.body.nb_ann);
+        vis.resource = req.body.resource;
+        vis.starttime = req.body.starttime;
+        vis.announcements = Number(req.body.announcements);
   
         vis.save()
           .then(() => res.json('Visibility updated!'))

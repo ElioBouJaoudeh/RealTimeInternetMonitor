@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Container } from "../../globalStyles";
 import LineChart from "./LineChart";
@@ -15,6 +14,7 @@ export const HistContainer = styled(Container)`
 `;
 
 function History() {
+
   const [userData, setUserData] = useState({
     labels: UserData.map((data) => data.year),
     datasets: [
