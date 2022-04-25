@@ -9,7 +9,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import { Navbar, Footer } from "./components";
 import Chart from "./components/Chart";
 import ASNG from "./components/Features/ASNG";
-//import Search from "./components/Features/Search";
+import Search from "./components/Features/Search";
 import BarChart from "./components/Features/BarChart";
 import LineChart from "./components/Chart";
 
@@ -26,6 +26,7 @@ function App() {
         <Route path="/visibility" exact component={Visibility} />
         <Route path="/asn" exact component={ASN} />
         <Route path="/hist" exact component={LineChart} />
+        <Route path="/search" exact component={Search} />
         
         <Route path="/barchart" exact component={BarChart} />
       </Switch>
