@@ -56,62 +56,6 @@
 
 // module.exports = Chart;
 
-// import { Line } from "react-chartjs-2";
-
-// function Chartt() {
-//   var ctx = document.getElementById("canvas").getContext("2d");
-//   var myChart = new Line(ctx, {
-//     type: "line",
-//     data: {
-//       labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-//       datasets: [
-//         {
-//           label: "# of Votes",
-//           data: [12, 19, 3, 5, 2, 3],
-//           backgroundColor: [
-//             "rgba(255, 99, 132, 0.2)",
-//             "rgba(54, 162, 235, 0.2)",
-//             "rgba(255, 206, 86, 0.2)",
-//             "rgba(75, 192, 192, 0.2)",
-//             "rgba(153, 102, 255, 0.2)",
-//             "rgba(255, 159, 64, 0.2)",
-//           ],
-//           borderColor: [
-//             "rgba(255, 99, 132, 1)",
-//             "rgba(54, 162, 235, 1)",
-//             "rgba(255, 206, 86, 1)",
-//             "rgba(75, 192, 192, 1)",
-//             "rgba(153, 102, 255, 1)",
-//             "rgba(255, 159, 64, 1)",
-//           ],
-//           borderWidth: 1,
-//         },
-//       ],
-//     },
-//     options: {
-//       scales: {
-//         y: {
-//           beginAtZero: true,
-//         },
-//       },
-//     },
-//   });
-// }
-
-// export default Chartt;
-
-import React, { useState, useEffect } from "react";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
-
 import { Line } from "react-chartjs-2";
 
 ChartJS.register(
@@ -175,13 +119,112 @@ const LineChart = () => {
         fontSize: 25,
       },
     },
-  };
+  });
+}
 
-  return (
-    <div>
-      <Line data={data} height={400} options={options} />
-    </div>
-  );
-};
+export default Chartt;
 
-export default LineChart;
+// import React, { useState, useEffect } from "react";
+// import {
+//   Chart as ChartJS,
+//   CategoryScale,
+//   LinearScale,
+//   PointElement,
+//   LineElement,
+//   Title,
+//   Tooltip,
+//   Legend,
+// } from "chart.js";
+
+// import { Line } from "react-chartjs-2";
+
+// ChartJS.register(
+//   CategoryScale,
+//   LinearScale,
+//   PointElement,
+//   LineElement,
+//   Title,
+//   Tooltip,
+//   Legend
+// );
+
+// const LineChart = () => {
+//   const [chart, setChart] = useState({});
+//   var baseUrl = "https://stat.ripe.net/data/bgp-update-activity/data.json";
+//   var proxyUrl = "https://cors-anywhere.herokuapp.com/";
+//   //var apiKey = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       await fetch(`${baseUrl}`, {
+//         method: "GET",
+//         headers: {
+//           "Content-Type": "application/json",
+//           //"x-access-token": `${apiKey}`,
+//           "Access-Control-Allow-Origin": "*",
+//         },
+//       })
+//         .then((response) => {
+//           if (response.ok) {
+//             response.json().then((json) => {
+//               console.log(json.data);
+//               setChart(json.data);
+//             });
+//           }
+//         })
+//         .catch((error) => {
+//           console.log(error);
+//         });
+//     };
+//     fetchData();
+//   }, [baseUrl, proxyUrl]);
+
+//   console.log("chart", chart);
+//   var data = {
+//     labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+//     //labels: chart?.coins?.map((x) => x.name),
+//     datasets: [
+//       {
+//         label: "# of votes",
+//         data: [12, 19, 3, 5, 2, 3],
+//         // label: `${chart?.coins?.length} Coins Available`,
+//         // data: chart?.coins?.map((x) => x.price),
+//         backgroundColor: [
+//           "rgba(255, 99, 132, 0.2)",
+//           "rgba(54, 162, 235, 0.2)",
+//           "rgba(255, 206, 86, 0.2)",
+//           "rgba(75, 192, 192, 0.2)",
+//           "rgba(153, 102, 255, 0.2)",
+//           "rgba(255, 159, 64, 0.2)",
+//         ],
+//         borderColor: [
+//           "rgba(255, 99, 132, 1)",
+//           "rgba(54, 162, 235, 1)",
+//           "rgba(255, 206, 86, 1)",
+//           "rgba(75, 192, 192, 1)",
+//           "rgba(153, 102, 255, 1)",
+//           "rgba(255, 159, 64, 1)",
+//         ],
+//         borderWidth: 1,
+//       },
+//     ],
+//   };
+
+//   var options = {
+//     maintainAspectRatio: false,
+//     scales: {},
+//     legend: {
+//       labels: {
+//         fontSize: 25,
+//       },
+//     },
+//   };
+
+//   return (
+//     <div>
+//       <Line data={data} height={400} options={options} />
+//     </div>
+//   );
+// };
+
+// export default LineChart;

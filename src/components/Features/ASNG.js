@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "../../globalStyles";
 import { Container } from "../../globalStyles";
+import axios from "axios";
+
 import "./ASN.css";
 
 export const ASNContainer = styled(Container)`
@@ -56,16 +58,45 @@ export const FCard = styled(Link)`
 `;
 
 function ASNG() {
-    return (
-        <ASNContainer>
+  const [data, setData] = useState([{}]);
+  useEffect(() => {
+    fetch("https://intermeterflaskserver.herokuapp.com/pred")
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data);
+        let jsonlist = data["data"]["updates"];
+        let listlen = jsonlist.length;
+        let newlen = listlen / 100;
+        console.log(data);
+        console.log(newlen);
+        const listtoadd = {
+          resource: data["data"]["resource"],
+          announcements: data["data"]["updates"][0]["announcements"],
+          starttime: data["data"]["updates"][0]["starttime"],
+        };
+        const listtoadd1 = {
+          resource: data["data"]["resource"],
+          announcements: data["data"]["updates"][1]["announcements"],
+          starttime: data["data"]["updates"][1]["starttime"],
+        };
+        console.log(listtoadd1);
+        // axios.post("http://localhost:5000/vis/add", listtoadd1)
+        //    .then(res=>console.log(res.data));
+        // for (let i = 0; i < newlen; i++) {
+        //   axios.post("http://localhost:5000/vis/add", {"resource": data["data"]["resource"], "announcements": data["data"]["updates"][i]["announcements"], "starttime": data["data"]["updates"][i]["starttime"]})
+        //    .then(res=>console.log(res.data));
+        // }
+      });
+  }, []);
+
+  return (
+    <ASNContainer>
       <div className="visibility-container">
         <video src="/videos/blue.mp4" autoPlay loop muted />
         <FContainer position="relative">
-          <Link to='/asn'>
-          <Button primary >
-              BACK
-          </Button>
-         </Link>
+          <Link to="/asn">
+            <Button primary>BACK</Button>
+          </Link>
         </FContainer>
       </div>
     </ASNContainer>

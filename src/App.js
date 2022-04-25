@@ -9,7 +9,9 @@ import ScrollToTop from "./components/ScrollToTop";
 import { Navbar, Footer } from "./components";
 import Chart from "./components/Chart";
 import ASNG from "./components/Features/ASNG";
-import LineChart from "./components/Chart";
+import Search from "./components/Features/Search";
+import BarChart from "./components/Features/BarChart";
+import Chartt from "./components/Chart";
 
 
 function App() {
@@ -23,8 +25,9 @@ function App() {
         <Route path="/asngraph" exact component={ASNG} />
         <Route path="/visibility" exact component={Visibility} />
         <Route path="/asn" exact component={ASN} />
-        <Route path="/hist" exact component={LineChart} />
-        {/* <Route path="/as" exact component={ASN} /> */}
+        <Route path="/hist" exact component={Chartt} />
+        <Route path="/search" exact component={Search} />
+        <Route path="/barchart" exact component={BarChart} />
       </Switch>
       <Footer />
     </Router>

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Container } from "../../globalStyles";
 import LineChart from "./LineChart";
@@ -15,19 +14,9 @@ export const HistContainer = styled(Container)`
 `;
 
 function History() {
-  const [data,setData]=useState([{}])
-  useEffect(()=>{
-    fetch("https://intermeterflaskserver.herokuapp.com/history").then(
-      res=>res.json()
-    ).then(
-      data => {
-        setData(data)
-        console.log(data)
-      }
-    )
-  },[])
-  const [user, setUserData] = useState({
-    labels: data.map((item, i) => i),
+
+  const [userData, setUserData] = useState({
+    labels: UserData.map((data) => data.year),
     datasets: [
       {
         label: "Announcements",
