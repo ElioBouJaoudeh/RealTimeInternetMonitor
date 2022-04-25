@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Container } from "../../globalStyles";
 import LineChart from "./LineChart";
-import { UserData } from "../Data";
+
 
 export const HistContainer = styled(Container)`
   display: flex;
@@ -15,12 +15,23 @@ export const HistContainer = styled(Container)`
 `;
 
 function History() {
-  const [userData, setUserData] = useState({
-    labels: UserData.map((data) => data.year),
+  const [data,setData]=useState([{}])
+  useEffect(()=>{
+    fetch("https://intermeterflaskserver.herokuapp.com/history").then(
+      res=>res.json()
+    ).then(
+      data => {
+        setData(data)
+        console.log(data)
+      }
+    )
+  },[])
+  const [user, setUserData] = useState({
+    labels: data.map((item, i) => i),
     datasets: [
       {
-        label: "Users Gained",
-        data: UserData.map((data) => data.userGain),
+        label: "Announcements",
+        data: data.map((item, i) => item),
         backgroundColor: [
           "#6a91af",
           "#6a91af",
@@ -41,7 +52,7 @@ function History() {
           width: 700,
         }}
       >
-        <LineChart chartData={userData} />
+        {/* <LineChart chartData={user} /> */}
       </div>
     </HistContainer>
   );

@@ -125,44 +125,25 @@ ChartJS.register(
 );
 
 const LineChart = () => {
-  const [chart, setChart] = useState({});
-  var baseUrl = "https://stat.ripe.net/data/bgp-update-activity/data.json";
-  var proxyUrl = "https://cors-anywhere.herokuapp.com/";
-  //var apiKey = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+  const [chart,setData]=useState([{}])
+  useEffect(()=>{
+    fetch("https://intermeterflaskserver.herokuapp.com/history").then(
+      res=>res.json()
+    ).then(
+      chart => {
+        setData(chart)
+        console.log(chart)
+      }
+    )
+  },[])
 
-  useEffect(() => {
-    const fetchData = async () => {
-      await fetch(`${baseUrl}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          //"x-access-token": `${apiKey}`,
-          "Access-Control-Allow-Origin": "*",
-        },
-      })
-        .then((response) => {
-          if (response.ok) {
-            response.json().then((json) => {
-              console.log(json.data);
-              setChart(json.data);
-            });
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
-    fetchData();
-  }, [baseUrl, proxyUrl]);
-
-  console.log("chart", chart);
   var data = {
-    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+    labels: Object.keys(chart).map((key, index) =>key),
     //labels: chart?.coins?.map((x) => x.name),
     datasets: [
       {
-        label: "# of votes",
-        data: [12, 19, 3, 5, 2, 3],
+        label: "number of announcements",
+        data:Object.keys(chart).map((key, value) =>chart[key]),
         // label: `${chart?.coins?.length} Coins Available`,
         // data: chart?.coins?.map((x) => x.price),
         backgroundColor: [

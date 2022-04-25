@@ -11,6 +11,7 @@ import Chart from "./components/Chart";
 import ASNG from "./components/Features/ASNG";
 import LineChart from "./components/Chart";
 
+
 function App() {
   return (
     <Router>
