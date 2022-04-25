@@ -1,73 +1,110 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import { Button } from "../../globalStyles";
-import { Container } from "../../globalStyles";
-import "./ASN.css";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
 
-export const ASNContainer = styled(Container)`
-  display: flex;
-  justify-content: space-between;
-  height: 850px;
-  font-size: 15px;
+import { Line } from "react-chartjs-2";
 
-  ${Container}
-`;
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
-export const FContainer = styled.div`
-  display: flex;
-  justify-content: left;
-  align-items: center;
 
-  @media screen and (max-width: 960px) {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-  }
-`;
+const ASNG = () => {
 
-export const FCard = styled(Link)`
-  background: #2c4151;
-  box-shadow: 0 6px 20px rgba(56, 125, 255, 0.2);
-  width: 40%;
-  height: 100%;
-  text-decoration: none;
-  border-radius: 4px;
+  const [chart,setData]=useState([{}])
+  useEffect(()=>{
+    fetch("https://intermeterflaskserver.herokuapp.com/history").then(
+      res=>res.json()
+    ).then(
+      chart => {
+        setData(chart)
+        console.log(chart)
+      }
+    )
+  },[])
 
-  &:nth-child(2) {
-    margin: 24px;
-  }
 
-  &:hover {
-    transform: scale(1.06);
-    transition: all 0.3s ease-out;
-    color: white;
-  }
+  var datasingle = {
+    labels: Object.keys(chart).map((key, index) =>key),
+    //labels: chart?.coins?.map((x) => x.name),
+    datasets: [
+      {
+        label: "number of announcements",
+        data:Object.keys(chart).map((key, value) =>chart[key]),
+        // label: `${chart?.coins?.length} Coins Available`,
+        // data: chart?.coins?.map((x) => x.price),
+        backgroundColor: [
+          "rgba(255, 99, 132, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgba(255, 206, 86, 0.2)",
+          "rgba(75, 192, 192, 0.2)",
+          "rgba(153, 102, 255, 0.2)",
+          "rgba(255, 159, 64, 0.2)",
+        ],
+        borderColor: [
+          "rgba(255, 99, 132, 1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(255, 206, 86, 1)",
+          "rgba(75, 192, 192, 1)",
+          "rgba(153, 102, 255, 1)",
+          "rgba(255, 159, 64, 1)",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
 
-  @media screen and (max-width: 960px) {
-    width: 90%;
+  var options = {
+    maintainAspectRatio: false,
+    scales: {
+      y:
+        {
+          min: 0,
+          max: 400,
+          stepSize: 50,
+        },
+      x:
+        {
+          
+        },
+    },
+    legend: {
+      labels: {
+        fontSize: 25,
+      },
+    },
+  };
+  var options1 = {
+    maintainAspectRatio: false,
+    scales: {},
+    legend: {
+      labels: {
+        fontSize: 25,
+      },
+    },
+  };
 
-    &:hover {
-      transform: none;
-    }
-  }
-`;
-
-function ASNG() {
-    return (
-        <ASNContainer>
-      <div className="visibility-container">
-        <video src="/videos/blue.mp4" autoPlay loop muted />
-        <FContainer position="relative">
-          <Link to="/asn">
-            <Button primary>BACK</Button>
-          </Link>
-        </FContainer>
-      </div>
-    </ASNContainer>
+  return (
+    <div>
+      <Line data={datasingle} height={400} options={options1} />
+    </div>
   );
-}
+};
+
 
 export default ASNG;
+
