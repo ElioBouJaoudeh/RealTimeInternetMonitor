@@ -13,7 +13,6 @@ import Search from "./components/Features/Search";
 import BarChart from "./components/Features/BarChart";
 import LineChart from "./components/Chart";
 
-
 function App() {
   return (
     <Router>
@@ -27,7 +26,6 @@ function App() {
         <Route path="/asn" exact component={ASN} />
         <Route path="/hist" exact component={LineChart} />
         <Route path="/search" exact component={Search} />
-        
         <Route path="/barchart" exact component={BarChart} />
       </Switch>
       <Footer />

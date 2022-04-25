@@ -1,4 +1,4 @@
-import React , {useState } from "react";
+import React, { useState } from "react";
 import data from "./ListData.json";
 
 function List(props) {
@@ -14,14 +14,11 @@ function List(props) {
       return el.name.toLowerCase().includes(props.input);
     }
   });
-  console.log(filteredData)
   return (
-
     <ul>
       {filteredData.map((item) => (
         <li key={item.code}>{item.name}</li>
       ))}
-      <li>test</li>
     </ul>
   );
 }
