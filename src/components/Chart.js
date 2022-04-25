@@ -56,6 +56,18 @@
 
 // module.exports = Chart;
 
+import React, { useState, useEffect } from "react";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+
 import { Line } from "react-chartjs-2";
 
 ChartJS.register(
@@ -67,6 +79,7 @@ ChartJS.register(
   Tooltip,
   Legend
 );
+
 
 const LineChart = () => {
   const [chart,setData]=useState([{}])
@@ -119,10 +132,16 @@ const LineChart = () => {
         fontSize: 25,
       },
     },
-  });
-}
+  };
 
-export default Chartt;
+  return (
+    <div>
+      <Line data={data} height={400} options={options} />
+    </div>
+  );
+};
+
+export default LineChart;
 
 // import React, { useState, useEffect } from "react";
 // import {
