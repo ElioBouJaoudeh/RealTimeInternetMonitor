@@ -3,6 +3,56 @@ import { Bar } from "react-chartjs-2";
 import React, { useEffect } from "react";
 import data from "./ListData.json";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { Container } from "../../globalStyles";
+
+export const ASNContainer = styled(Container)`
+  display: flex;
+  justify-content: space-between;
+  height: 1000px;
+  font-size: 15px;
+  ${Container}
+`;
+
+export const FContainer = styled.div`
+  display: flex;
+  justify-content: left;
+  margin-bottom: 5%;
+  align-items: center;
+  @media screen and (max-width: 960px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+`;
+
+export const FCard = styled(Link)`
+  background: white;
+  box-shadow: 0 6px 20px rgba(56, 125, 255, 0.2);
+  width: 90%;
+  height: 100%;
+  margin-left: 5%;
+  text-decoration: none;
+  border-radius: 4px;
+  &:nth-child(2) {
+    margin: 24px;
+  }
+  @media screen and (max-width: 960px) {
+    width: 90%;
+    &:hover {
+      transform: none;
+    }
+  }
+`;
+
+export const FHeading = styled.p`
+  color: #fff;
+  font-size: 16px;
+  padding: 15px;
+  margin-left: 24px;
+`;
 
 export default function BarChart() {
   let num1 = [];
@@ -61,6 +111,12 @@ export default function BarChart() {
     ],
   };
   return (
+    <ASNContainer>
+      <div className="asn-container">
+        <video src="/videos/blue.mp4" autoPlay loop muted />
+        <FContainer position="relative">
+          <FCard>
+            <FHeading>
     <div style={{ width: "80%" }}>
       <Bar
         data={state}
@@ -94,5 +150,10 @@ export default function BarChart() {
         <button>Back</button>
       </Link> */}
     </div>
+    </FHeading>
+    </FCard>
+    </FContainer>
+    </div>
+    </ASNContainer>
   );
 }

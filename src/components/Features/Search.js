@@ -2,7 +2,6 @@ import React, { useState } from "react";
 // import TextField from "@mui/material/TextField";
 import List from "./List";
 import "./Search.css";
-import BarChart from "./BarChart";
 import { Link } from "react-router-dom";
 // import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -22,6 +21,7 @@ function Search() {
   return (
     // <Router>
     <div className="main">
+      <video src="/videos/blue.mp4" autoPlay loop muted />
       <div style={{ marginBlock: "15%" }}>
         <h1>Enter the country name </h1>
         <div

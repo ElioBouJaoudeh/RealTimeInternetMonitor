@@ -29,7 +29,7 @@ function App() {
         <Route path="/barchart" exact component={BarChart} />
       </Switch>
       <Footer />
-    </Router>
+      </Router>
   );
 }
 

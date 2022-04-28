@@ -52,7 +52,7 @@ export const FCard = styled(Link)`
   border-radius: 4px;
 
   &:nth-child(2) {
-    margin: 24px;
+    margin: 15px;
   }
 
   &:hover {

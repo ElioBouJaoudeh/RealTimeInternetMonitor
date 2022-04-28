@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { Button } from "../../globalStyles";
 import { Container } from "../../globalStyles";
 import { Line } from "react-chartjs-2";
-import "./ASN.css";
 
 import {
   Chart as ChartJS,
@@ -30,7 +29,7 @@ ChartJS.register(
 export const ASNContainer = styled(Container)`
   display: flex;
   justify-content: space-between;
-  height: 1000px;
+  height: 850px;
   font-size: 15px;
   ${Container}
 `;
@@ -75,28 +74,27 @@ export const FHeading = styled.p`
   margin-left: 24px;
 `;
 
-const ASNG = () => {
-
-  const [chart,setData]=useState([{}])
+const LineChart = () => {
+  const [groupe,setD]=useState([{}])
   useEffect(()=>{
-    fetch("https://intermeterflaskserver.herokuapp.com/history").then(
+    fetch("https://intermeterflaskserver.herokuapp.com/all").then(
       res=>res.json()
     ).then(
-      chart => {
-        setData(chart)
-        console.log(chart)
+      groupe => {
+        setD(groupe)
+        console.log(groupe)
       }
     )
   },[])
 
-
-  var datasingle = {
-    labels: Object.keys(chart).map((key, index) =>key),
+  
+  var data = {
+    labels: Object.keys(groupe).map((key, index) =>key),
     //labels: chart?.coins?.map((x) => x.name),
     datasets: [
       {
-        label: "number of announcements",
-        data:Object.keys(chart).map((key, value) =>chart[key]),
+        label: "Prefixes variation",
+        data:Object.keys(groupe).map((key, value) =>groupe[key]),
         // label: `${chart?.coins?.length} Coins Available`,
         // data: chart?.coins?.map((x) => x.price),
         backgroundColor: [
@@ -119,7 +117,6 @@ const ASNG = () => {
       },
     ],
   };
-
   var options = {
     maintainAspectRatio: false,
     scales: {
@@ -127,7 +124,7 @@ const ASNG = () => {
         {
           min: 0,
           max: 400,
-          stepSize: 50,
+          stepSize: 10,
         },
       x:
         {
@@ -163,8 +160,9 @@ const ASNG = () => {
           </Button>
          </Link>
          <div>
-         <Line data={datasingle} height={400} options={options1} />
+         <Line data={data} height={400} options={options1} />
          </div>
+
          </FHeading>
             </FCard>
         </FContainer>
@@ -173,7 +171,5 @@ const ASNG = () => {
     </ASNContainer>
   );
 };
-
-
-export default ASNG;
+export default LineChart;
 

@@ -3,6 +3,7 @@ import { Button } from "../../globalStyles";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import { GiConcentrationOrb } from "react-icons/gi";
 import { GiWireframeGlobe } from "react-icons/gi";
+import { GiAtomicSlashes } from "react-icons/gi";
 import { IconContext } from "react-icons/lib";
 import {
   FSection,
@@ -46,10 +47,20 @@ function Features() {
             <FCard to="/asn">
               <FCardInfo>
                 <FCardIcon>
-                  <GiWireframeGlobe />
+                  <GiAtomicSlashes />
                 </FCardIcon>
                 <FTitle>Global Routing</FTitle>
                 <FDesc>Check the dynamics of your ASN around the world</FDesc>
+                <Button primary>Start</Button>
+              </FCardInfo>
+            </FCard>
+            <FCard to="/search">
+              <FCardInfo>
+                <FCardIcon>
+                  <GiWireframeGlobe />
+                </FCardIcon>
+                <FTitle>Search</FTitle>
+                <FDesc>Seen and registered ASNs in a country of your choice</FDesc>
                 <Button primary>Start</Button>
               </FCardInfo>
             </FCard>

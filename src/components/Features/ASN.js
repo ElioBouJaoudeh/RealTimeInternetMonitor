@@ -157,9 +157,7 @@ function ASN() {
   return (
     <ASNContainer>
       <div className="asn-container">
-        <Headline>
-          <h1>General information about your connection:</h1>
-        </Headline>
+        <h1>General information about your connection:</h1>
         <video src="/videos/blue.mp4" autoPlay loop muted />
         <FContainer position="relative">
           <FCard>
