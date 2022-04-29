@@ -152,8 +152,9 @@ const ASNG = () => {
 
   return (
     <ASNContainer>
-      <div className="asn-container">
+      <div className="chart-container">
         <video src="/videos/blue.mp4" autoPlay loop muted />
+        <h1>Number of announcements related to the your prefix over the past year:</h1>
         <FContainer position="relative">
           <FCard>
             <FHeading>

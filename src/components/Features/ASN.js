@@ -139,8 +139,14 @@ function ASN() {
         for (const key of Object.keys(dataa[asn])){
           keystaken.push(key);
         }
-        for (let i = 0; i < val.length/4; i++) {
-          couplekeystaken.push(val[i]);
+        if (val.length<=12){
+          for (let i = 0; i < val.length; i++) {
+            couplekeystaken.push(val[i]);
+          }
+        }else{
+          for (let i = 0; i < val.length/4; i++) {
+            couplekeystaken.push(val[i]);
+          }
         }
         visipv4 = otherval[2].toString();
         visipv6 = otherval[3].toString();

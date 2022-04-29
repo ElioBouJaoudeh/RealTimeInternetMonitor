@@ -5,6 +5,7 @@ import data from "./ListData.json";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Container } from "../../globalStyles";
+import "./BarChart.css";
 
 export const ASNContainer = styled(Container)`
   display: flex;
@@ -112,12 +113,13 @@ export default function BarChart() {
   };
   return (
     <ASNContainer>
-      <div className="asn-container">
-        <video src="/videos/blue.mp4" autoPlay loop muted />
+      <div className="chart-container">
+      <h1>Registered and seen Autonomous System Numbers in the chosen country:</h1>
+        <video src="/videos/blue.mp4" autoPlay loop muted/>
         <FContainer position="relative">
           <FCard>
             <FHeading>
-    <div style={{ width: "80%" }}>
+    <div>
       <Bar
         data={state}
         options={{

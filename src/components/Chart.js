@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Line } from "react-chartjs-2";
-import "../components/Features/ASN.css";
+import "./Chart.css";
 
 import {
   Chart as ChartJS,
@@ -186,8 +186,9 @@ const LineChart = () => {
 
   return (
     <ASNContainer>
-      <div className="asn-container">
+      <div className="chart-container">
         <video src="/videos/blue.mp4" autoPlay loop muted />
+        <h1>BGP visibility of your Autonomous System related to all the prefixes:</h1>
         <FContainer position="relative">
           <FCard>
             <FHeading>

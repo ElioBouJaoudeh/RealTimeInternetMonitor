@@ -46,14 +46,12 @@ export const FContainer = styled.div`
 export const FCard = styled(Link)`
   background: #2c4151;
   box-shadow: 0 6px 20px rgba(56, 125, 255, 0.2);
-  width: 280px;
+  width: 275px;
   height: 350px;
   text-decoration: none;
   border-radius: 4px;
 
-  &:nth-child(2) {
-    margin: 15px;
-  }
+  margin: 10px;
 
   &:hover {
     transform: scale(1.06);
