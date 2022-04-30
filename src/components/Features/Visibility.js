@@ -4,6 +4,7 @@ import ProgressBar from './ProgressBar';
 import styled from 'styled-components';
 import { Button } from "../../globalStyles";
 import { Container } from '../../globalStyles';
+import { useDispatch } from "react-redux";
 
 export const VisContainer = styled(Container)`
   display: flex;
@@ -26,6 +27,16 @@ function Visibility() {
       }
     )
   },[])
+
+  var dict = {
+    "asncode": data["asncode"],
+    "asnname": data["asnname"],
+    "country": data["asnname"],
+    "ip": data["ip"],
+    "isp": data["isp"],
+    "prefix": data["prefix"],
+    "rpki": data["rpki"]
+  };
 
   const [progress, setProgress] = useState(0);
   const [color, setColor] = useState('');
@@ -119,8 +130,8 @@ function Visibility() {
       {(typeof data.ip === 'undefined') ? (
       <p>Loading...</p>
     ):(
-        Object.keys(data).map((key, index) => (
-          <p key={index}> {key} : {data[key]}</p> 
+        Object.keys(dict).map((key, index) => (
+          <p key={index}> {key} : {dict[key]}</p> 
         ))
     )}
     <div className="button-container">
