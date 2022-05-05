@@ -57,24 +57,24 @@ export const FHeading = styled.p`
 export default function BarChart() {
   let num1 = [];
   let num2 = [];
-  let cod;
-  const [names, setD] = useState([{}]);
-  useEffect(() => {
-    const pays = localStorage.getItem("Country");
-    console.log(pays);
-    fetch("https://intermeterflaskserver.herokuapp.com/pay")
-      .then((res) => res.json())
-      .then((names) => {
-        setD(names);
-        console.log(names);
-      });
-    Object.keys(names).map((key, value) => {
-      if (key === pays) {
-        cod = names[key];
-        console.log(cod);
-        return cod;
-      }
-    });
+
+  // const [names, setD] = useState([{}]);
+  // useEffect(() => {
+  //   const pays = localStorage.getItem("Country");
+  //   console.log(pays);
+  //   fetch("https://intermeterflaskserver.herokuapp.com/pay")
+  //     .then((res) => res.json())
+  //     .then((names) => {
+  //       setD(names);
+  //       console.log(names);
+  //     });
+  //   Object.keys(names).map((key, value) => {
+  //     if (key === pays) {
+  //       cod = names[key];
+  //       console.log(cod);
+  //       return cod;
+  //     }
+  //   });
     // data.map((item) => {
     //   if (item.name === pays) {
     //     cod = item.code;
@@ -84,8 +84,9 @@ export default function BarChart() {
     //     return "error";
     //   }
     // });
-    const url =
-      "https://stat.ripe.net/data/country-asns/data.json?resource=" + cod;
+    const cod = localStorage.getItem("Cod");
+        const url =
+        "https://stat.ripe.net/data/country-asns/data.json?resource=" + cod;
     const fetchData = async () => {
       try {
         const response = await fetch(url);
@@ -98,9 +99,10 @@ export default function BarChart() {
         console.log("error", error);
       }
     };
-
-    fetchData();
-  }, []);
+    if(cod!=undefined){
+      fetchData();
+    }
+  
   const state = {
     labels: [0],
     datasets: [

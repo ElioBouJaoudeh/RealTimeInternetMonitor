@@ -39,7 +39,6 @@ const ModalContent = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  line-height: 1.8;
   color: #141414;
 
   h1{
@@ -110,6 +109,19 @@ export const Modal = ({ showModal, setShowModal }) => {
     )
   },[])
 
+  const [dataa,setDataa]=useState([{}])
+  useEffect(()=>{
+    fetch("https://intermeterflaskserver.herokuapp.com/ml").then(
+      res=>res.json()
+    ).then(
+      dataa => {
+        setData(dataa)
+        console.log(typeof(dataa))
+        console.log(dataa)
+      }
+    )
+  },[])
+
   return (
     <>
       {showModal ? (
@@ -120,6 +132,7 @@ export const Modal = ({ showModal, setShowModal }) => {
               <ModalContent>
                 <h1>Updates on latest access:</h1>
                 <p>{data["outages"]}</p>
+                <p>{dataa["outages"]}</p>
               </ModalContent>
               <CloseModalButton
                 aria-label='Close modal'

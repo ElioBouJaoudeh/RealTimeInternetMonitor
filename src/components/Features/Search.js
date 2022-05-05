@@ -1,23 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // import TextField from "@mui/material/TextField";
 import List from "./List";
 import "./Search.css";
 import { Link } from "react-router-dom";
 // import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
+
+
 export function handleSubmit() {
   const country = document.getElementById("country").value;
-  localStorage.setItem("Country", country);
+  localStorage.setItem("Country",country);
   return;
 }
+
 function Search() {
   const [inputText, setInputText] = useState("");
+  const country = localStorage.getItem("Country");
+  const [names,setD]=useState([{}]);
+    useEffect(()=>{
+      fetch("https://intermeterflaskserver.herokuapp.com/pay").then(
+        res=>res.json()
+      ).then(
+        names => {
+          setD(names)
+          console.log(names)
+        }
+      )
+    },[])
+    let cod;
+    Object.keys(names).map((key, value) => {
+      if (key === country) {
+        cod = names[key];
+        console.log(cod);
+        return cod;
+      }
+    });
+  localStorage.setItem("Cod", cod);
   let inputHandler = (e) => {
     //convert input text to lower case
     var lowerCase = e.target.value.toLowerCase();
     setInputText(lowerCase);
   };
-
+    
   return (
     // <Router>
     <div className="main">
