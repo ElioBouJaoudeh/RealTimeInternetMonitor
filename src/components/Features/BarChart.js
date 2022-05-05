@@ -1,11 +1,10 @@
 import { Chart as ChartJS } from "chart.js/auto";
 import { Bar } from "react-chartjs-2";
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import data from "./ListData.json";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Container } from "../../globalStyles";
-import "./BarChart.css";
 
 export const ASNContainer = styled(Container)`
   display: flex;
@@ -59,18 +58,32 @@ export default function BarChart() {
   let num1 = [];
   let num2 = [];
   let cod;
+  const [names, setD] = useState([{}]);
   useEffect(() => {
     const pays = localStorage.getItem("Country");
     console.log(pays);
-    data.map((item) => {
-      if (item.name === pays) {
-        cod = item.code;
+    fetch("https://intermeterflaskserver.herokuapp.com/pay")
+      .then((res) => res.json())
+      .then((names) => {
+        setD(names);
+        console.log(names);
+      });
+    Object.keys(names).map((key, value) => {
+      if (key === pays) {
+        cod = names[key];
         console.log(cod);
         return cod;
-      } else {
-        return "error";
       }
     });
+    // data.map((item) => {
+    //   if (item.name === pays) {
+    //     cod = item.code;
+    //     console.log(cod);
+    //     return cod;
+    //   } else {
+    //     return "error";
+    //   }
+    // });
     const url =
       "https://stat.ripe.net/data/country-asns/data.json?resource=" + cod;
     const fetchData = async () => {
@@ -113,49 +126,48 @@ export default function BarChart() {
   };
   return (
     <ASNContainer>
-      <div className="chart-container">
-      <h1>Registered and seen Autonomous System Numbers in the chosen country:</h1>
-        <video src="/videos/blue.mp4" autoPlay loop muted/>
+      <div className="asn-container">
+        <video src="/videos/blue.mp4" autoPlay loop muted />
         <FContainer position="relative">
           <FCard>
             <FHeading>
-    <div>
-      <Bar
-        data={state}
-        options={{
-          scales: {
-            x: {
-              stacked: true,
-            },
-            y: {
-              beginAtZero: true,
-            },
-          },
-          responsive: true,
-          title: {
-            display: true,
-            text: "ALOOOOO",
-            fontSize: 100,
-          },
-          legend: {
-            style: {
-              usePointStyle: true,
-            },
-            display: true,
-            labels: {
-              usePointStyle: true,
-            },
-          },
-        }}
-      />
-      {/* <Link to="/">
+              <div style={{ width: "80%" }}>
+                <Bar
+                  data={state}
+                  options={{
+                    scales: {
+                      x: {
+                        stacked: true,
+                      },
+                      y: {
+                        beginAtZero: true,
+                      },
+                    },
+                    responsive: true,
+                    title: {
+                      display: true,
+                      text: "ALOOOOO",
+                      fontSize: 100,
+                    },
+                    legend: {
+                      style: {
+                        usePointStyle: true,
+                      },
+                      display: true,
+                      labels: {
+                        usePointStyle: true,
+                      },
+                    },
+                  }}
+                />
+                {/* <Link to="/">
         <button>Back</button>
       </Link> */}
-    </div>
-    </FHeading>
-    </FCard>
-    </FContainer>
-    </div>
+              </div>
+            </FHeading>
+          </FCard>
+        </FContainer>
+      </div>
     </ASNContainer>
   );
 }

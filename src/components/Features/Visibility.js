@@ -1,9 +1,9 @@
-import React,{useState,useEffect} from "react";
-import './Visibility.css';
-import ProgressBar from './ProgressBar';
-import styled from 'styled-components';
+import React, { useState, useEffect } from "react";
+import "./Visibility.css";
+import ProgressBar from "./ProgressBar";
+import styled from "styled-components";
 import { Button } from "../../globalStyles";
-import { Container } from '../../globalStyles';
+import { Container } from "../../globalStyles";
 import { useDispatch } from "react-redux";
 
 export const VisContainer = styled(Container)`
@@ -15,49 +15,47 @@ export const VisContainer = styled(Container)`
 `;
 
 function Visibility() {
-  const [data,setData]=useState([{}])
-  useEffect(()=>{
-    fetch("https://intermeterflaskserver.herokuapp.com/ip").then(
-      res=>res.json()
-    ).then(
-      data => {
-        setData(data)
-        console.log(typeof(data))
-        console.log(data)
-      }
-    )
-  },[])
+  const [data, setData] = useState([{}]);
+  useEffect(() => {
+    fetch("https://intermeterflaskserver.herokuapp.com/ip")
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data);
+        console.log(typeof data);
+        console.log(data);
+      });
+  }, []);
 
   var dict = {
-    "asncode": data["asncode"],
-    "asnname": data["asnname"],
-    "country": data["asnname"],
-    "ip": data["ip"],
-    "isp": data["isp"],
-    "prefix": data["prefix"],
-    "rpki": data["rpki"]
+    asncode: data["asncode"],
+    asnname: data["asnname"],
+    country: data["asnname"],
+    ip: data["ip"],
+    isp: data["isp"],
+    prefix: data["prefix"],
+    rpki: data["rpki"],
   };
 
   const [progress, setProgress] = useState(0);
-  const [color, setColor] = useState('');
-  const colorArray = ['#fa0000', "#fa6900", "#7bff00", "#d9edfe"];
+  const [color, setColor] = useState("");
+  const colorArray = ["#fa0000", "#fa6900", "#7bff00", "#d9edfe"];
 
   const colorIPv4 = () => {
-    if (data["ipv4"]<50){
+    if (data["ipv4"] < 50) {
       return colorArray[0];
-    }
-    else if(data["ipv4"]>=50 && data["ipv4"]<100){
+    } else if (data["ipv4"] >= 50 && data["ipv4"] < 100) {
       return colorArray[1];
-    }else if(data["ipv4"]==100){
+    } else if (data["ipv4"] == 100) {
       return colorArray[2];
-    }else{
+    } else {
       return colorArray[3];
     }
-  }
+  };
 
-  function getipv4(){
-    if(typeof data.ip === 'undefined') {return 0;}
-    else{
+  function getipv4() {
+    if (typeof data.ip === "undefined") {
+      return 0;
+    } else {
       return data["ipv4"];
     }
   }
@@ -67,9 +65,9 @@ function Visibility() {
     setProgress(progressValue);
     const randomProgressColor = colorIPv4();
     setColor(randomProgressColor);
-  }
+  };
 
-  const onChange = e => {
+  const onChange = (e) => {
     if (e.target.value) {
       progress = e.target.value;
       setProgress(progress);
@@ -78,27 +76,27 @@ function Visibility() {
     } else {
       setProgress(0);
     }
-  }
+  };
 
   const [progress1, setProgress1] = useState(0);
-  const [color1, setColor1] = useState('');
+  const [color1, setColor1] = useState("");
 
   const colorIPv6 = () => {
-    if (data["ipv6"]<50){
+    if (data["ipv6"] < 50) {
       return colorArray[0];
-    }
-    else if(data["ipv6"]>=50 && data["ipv6"]<100){
+    } else if (data["ipv6"] >= 50 && data["ipv6"] < 100) {
       return colorArray[1];
-    }else if(data["ipv6"]==100){
+    } else if (data["ipv6"] == 100) {
       return colorArray[2];
-    }else{
+    } else {
       return colorArray[3];
     }
-  }
+  };
 
-  function getipv6(){
-    if(typeof data.ip === 'undefined') {return 0;}
-    else{
+  function getipv6() {
+    if (typeof data.ip === "undefined") {
+      return 0;
+    } else {
       console.log(data["ipv6"]);
       return data["ipv6"];
     }
@@ -109,9 +107,9 @@ function Visibility() {
     setProgress(progressValue1);
     const randomProgressColor1 = colorIPv6();
     setColor(randomProgressColor1);
-  }
+  };
 
-  const onChange1 = e => {
+  const onChange1 = (e) => {
     if (e.target.value) {
       progress1 = e.target.value;
       setProgress(progress1);
@@ -120,38 +118,41 @@ function Visibility() {
     } else {
       setProgress(0);
     }
-  }
+  };
 
   return (
     <VisContainer>
-    <div className="visibility-container">
-      <video src='/videos/blue.mp4' autoPlay loop muted />
-      <h1>General information about your connection:</h1>
-      {(typeof data.ip === 'undefined') ? (
-      <p>Loading...</p>
-    ):(
-        Object.keys(dict).map((key, index) => (
-          <p key={index}> {key} : {dict[key]}</p> 
-        ))
-    )}
-    <div className="button-container">
-    <br/>
-    <Button primary onClick={randomProgressValue}>
-        IPv4 Visibility
-        </Button>
-    <br/>
-    <Button primary onClick={randomProgressValue1}>
-        IPv6 Visibility
-    </Button>
-    </div>
-    <ProgressBar 
+      <div className="visibility-container">
+        <video src="/videos/blue.mp4" autoPlay loop muted />
+        <h1>General information about your connection:</h1>
+        {typeof data.ip === "undefined" ? (
+          <p>Loading...</p>
+        ) : (
+          Object.keys(dict).map((key, index) => (
+            <p key={index}>
+              {" "}
+              {key} : {dict[key]}
+            </p>
+          ))
+        )}
+        <div className="button-container">
+          <br />
+          <Button primary onClick={randomProgressValue}>
+            IPv4 Visibility
+          </Button>
+          <br />
+          <Button primary onClick={randomProgressValue1}>
+            IPv6 Visibility
+          </Button>
+        </div>
+        <ProgressBar
           progress={progress}
           size={250}
           strokeWidth={15}
-          circleOneStroke='#d9edfe'
+          circleOneStroke="#d9edfe"
           circleTwoStroke={color}
         />
-        </div>
+      </div>
     </VisContainer>
   );
 }
